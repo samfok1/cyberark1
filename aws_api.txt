@@ -1,0 +1,11 @@
+node {
+      stage('Work') {
+         withCredentials([conjurSecretCredential(credentialsId: 'DB_PASSWORD', variable: 'SECRET')]) {
+            echo "Hello World $SECRET"
+            sh "curl -H \'X-API-KEY: $SECRET\'  https://pezsz8jbt3.execute-api.ap-east-1.amazonaws.com/default/hello_world"
+         }
+      }
+      stage('Results') {
+         echo "Finished!"
+      }
+}
